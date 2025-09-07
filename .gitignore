@@ -1,0 +1,81 @@
+# --- Python / Django ---
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*$py.class
+
+# Django
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# --- Environments ---
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Packaging / Build ---
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Testing / Coverage ---
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# --- Migrations cache ---
+**/migrations/__pycache__/
+
+# --- IDE (PyCharm / JetBrains) ---
+.idea/
+*.iml
+
+# --- Tools ---
+.pybuilder/
+target/
+.ipynb_checkpoints
+.dmypy.json
+dmypy.json
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+cython_debug/
+
+# --- Other ---
+.DS_Store
