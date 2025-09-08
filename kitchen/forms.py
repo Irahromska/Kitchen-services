@@ -13,15 +13,11 @@ class DishForm(forms.ModelForm):
 
 
 class DishSearchForm(forms.Form):
-    name = forms.CharField(
-        max_length=255, required=False, label="Search dish by name"
-    )
+    name = forms.CharField(max_length=255, required=False, label="Search dish by name")
 
 
 class DishTypeSearchForm(forms.Form):
-    name = forms.CharField(
-        max_length=255, required=False, label="Search type by name"
-    )
+    name = forms.CharField(max_length=255, required=False, label="Search type by name")
 
 
 class IngredientSearchForm(forms.Form):

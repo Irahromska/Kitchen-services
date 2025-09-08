@@ -20,7 +20,9 @@ class CookListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search_form"] = CookSearchForm(initial={"username": self.request.GET.get("username")})
+        context["search_form"] = CookSearchForm(
+            initial={"username": self.request.GET.get("username")}
+        )
         return context
 
 
@@ -34,6 +36,7 @@ class CookCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = CookCreationForm
     success_url = reverse_lazy("users:cook-list")
 
+
 class CookExperienceUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Cook
     form_class = CookExperienceUpdateForm
@@ -42,6 +45,7 @@ class CookExperienceUpdateView(LoginRequiredMixin, generic.UpdateView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.request.user.pk)
+
 
 class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook

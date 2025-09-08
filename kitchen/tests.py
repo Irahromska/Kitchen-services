@@ -53,7 +53,7 @@ def test_dish_form_valid():
 
 @pytest.mark.django_db
 def test_index_view(client):
-    cook = Cook.objects.create_user(username="chef", password="test12345")
+    Cook.objects.create_user(username="chef", password="test12345")
     client.login(username="chef", password="test12345")
     url = reverse("kitchen:index")
     response = client.get(url)
@@ -63,10 +63,12 @@ def test_index_view(client):
 
 @pytest.mark.django_db
 def test_dish_list_view(client):
-    cook = Cook.objects.create_user(username="chef", password="test12345")
+    Cook.objects.create_user(username="chef", password="test12345")
     client.login(username="chef", password="test12345")
     dish_type = DishType.objects.create(name="Pizza")
-    Dish.objects.create(name="Margarita", description="Classic", price=8.00, dish_type=dish_type)
+    Dish.objects.create(
+        name="Margarita", description="Classic", price=8.00, dish_type=dish_type
+    )
 
     url = reverse("kitchen:dish-list")
     response = client.get(url)
@@ -76,14 +78,19 @@ def test_dish_list_view(client):
 
 @pytest.mark.django_db
 def test_dish_create_update_delete_views(client):
-    cook = Cook.objects.create_user(username="chef", password="test12345")
+    Cook.objects.create_user(username="chef", password="test12345")
     client.login(username="chef", password="test12345")
     dish_type = DishType.objects.create(name="Soup")
 
     create_url = reverse("kitchen:dish-create")
     response = client.post(
         create_url,
-        data={"name": "Borscht", "description": "Tasty", "price": 10, "dish_type": dish_type.id},
+        data={
+            "name": "Borscht",
+            "description": "Tasty",
+            "price": 10,
+            "dish_type": dish_type.id,
+        },
     )
     assert response.status_code == 302
     dish = Dish.objects.get(name="Borscht")
@@ -91,7 +98,12 @@ def test_dish_create_update_delete_views(client):
     update_url = reverse("kitchen:dish-update", args=[dish.id])
     response = client.post(
         update_url,
-        data={"name": "Updated Borscht", "description": "Tasty", "price": 12, "dish_type": dish_type.id},
+        data={
+            "name": "Updated Borscht",
+            "description": "Tasty",
+            "price": 12,
+            "dish_type": dish_type.id,
+        },
     )
     dish.refresh_from_db()
     assert response.status_code == 302
@@ -105,12 +117,16 @@ def test_dish_create_update_delete_views(client):
 
 @pytest.mark.django_db
 def test_dish_list_view_with_search(client):
-    cook = Cook.objects.create_user(username="chef", password="test12345")
+    Cook.objects.create_user(username="chef", password="test12345")
     client.login(username="chef", password="test12345")
 
     dish_type = DishType.objects.create(name="Pizza")
-    Dish.objects.create(name="Margarita", description="Classic", price=8.00, dish_type=dish_type)
-    Dish.objects.create(name="Pepperoni", description="Spicy", price=9.50, dish_type=dish_type)
+    Dish.objects.create(
+        name="Margarita", description="Classic", price=8.00, dish_type=dish_type
+    )
+    Dish.objects.create(
+        name="Pepperoni", description="Spicy", price=9.50, dish_type=dish_type
+    )
 
     url = reverse("kitchen:dish-list")
     response = client.get(url, {"name": "Margarita"})
@@ -123,7 +139,7 @@ def test_dish_list_view_with_search(client):
 
 @pytest.mark.django_db
 def test_dishtype_list_view_with_search(client):
-    cook = Cook.objects.create_user(username="chef", password="test12345")
+    Cook.objects.create_user(username="chef", password="test12345")
     client.login(username="chef", password="test12345")
 
     DishType.objects.create(name="Soup")
@@ -140,7 +156,7 @@ def test_dishtype_list_view_with_search(client):
 
 @pytest.mark.django_db
 def test_ingredient_list_view_with_search(client):
-    cook = Cook.objects.create_user(username="chef", password="test12345")
+    Cook.objects.create_user(username="chef", password="test12345")
     client.login(username="chef", password="test12345")
 
     Ingredient.objects.create(name="Tomato")

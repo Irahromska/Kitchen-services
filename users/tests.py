@@ -34,7 +34,9 @@ def test_cook_creation_form_valid():
 
 @pytest.mark.django_db
 def test_cook_experience_update_form_valid():
-    cook = Cook.objects.create_user(username="chef3", password="test12345", years_of_experience=1)
+    cook = Cook.objects.create_user(
+        username="chef3", password="test12345", years_of_experience=1
+    )
     form = CookExperienceUpdateForm(data={"years_of_experience": 10}, instance=cook)
     assert form.is_valid()
     updated_cook = form.save()
@@ -53,7 +55,7 @@ def test_cook_list_view(client):
 
 @pytest.mark.django_db
 def test_cook_create_update_delete_views(client):
-    client_user = Cook.objects.create_user(username="admin", password="test12345")
+    Cook.objects.create_user(username="admin", password="test12345")
     client.login(username="admin", password="test12345")
 
     create_url = reverse("users:cook-create")
@@ -85,7 +87,7 @@ def test_cook_create_update_delete_views(client):
 
 @pytest.mark.django_db
 def test_cook_list_view_with_search(client):
-    cook1 = Cook.objects.create_user(username="chef5", password="test12345")
+    Cook.objects.create_user(username="chef5", password="test12345")
     Cook.objects.create_user(username="othercook", password="test12345")
 
     client.login(username="chef5", password="test12345")
